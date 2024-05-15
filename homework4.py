@@ -151,7 +151,7 @@ def get_movies_for_year(year):
     rows = table.find_all('tr')
     
     # create an empty list and append the rows and cols into it
-    # Also separate the merged rows if two or more films share one distributor
+
     movies = []
     last_distributor = None
     for row in rows[1:]:
@@ -160,7 +160,7 @@ def get_movies_for_year(year):
             continue
         rank = cols[0].get_text(strip=True)
         title = cols[1].get_text(strip=True)
-
+    # Separate the merged rows if two or more films share one distributor
         if len(cols) >= 4:
             distributor = cols[2].get_text(strip=True)
             gross = cols[3].get_text(strip=True)
@@ -218,7 +218,7 @@ def main():
         print(f"Fetching movies for year {year}...")
         movies_for_year = get_movies_for_year(year)
         all_movies.extend(movies_for_year)
-        #time.sleep(3)
+        time.sleep(3)
         
     # Convert the list to DataFrame
     df_all_movies = pd.DataFrame(all_movies, columns=['Year', 'Rank', 'Title', 'Distributor', 'Domestic gross'])
